@@ -3,7 +3,7 @@
 
 :root { --panel-w: 380px; }
 
-body { font-family: 'Syne', sans-serif; height: 100vh; overflow: hidden; }
+body { font-family: "Twemoji Country Flags", 'Syne', sans-serif; height: 100vh; overflow: hidden; }
 
 /* ── HEADER ── */
 header {

@@ -17,7 +17,7 @@
   --default-country: #2a3441;
 }
 
-body { font-family: 'DM Sans', sans-serif; height: 100vh; overflow: hidden; }
+body { font-family: "Twemoji Country Flags", 'DM Sans', sans-serif; height: 100vh; overflow: hidden; }
 
 /* ── HEADER ── */
 header {

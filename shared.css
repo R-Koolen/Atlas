@@ -3,6 +3,7 @@
  * Load this BEFORE your project-specific stylesheet.
  *
  * Covers:
+ *   § 0  Flag-emoji polyfill (Twemoji Country Flags webfont)
  *   § 1  CSS variables  (Syne-atlas defaults; oil / passport / home override these)
  *   § 2  Reset
  *   § 3  Body base
@@ -16,6 +17,25 @@
  *   § 11 Panel    (ray-dalio / UN / bond)
  *   § 12 Gauge    (ray-dalio / UN / bond)
  */
+
+/* ═══════════════════════════════════════════════════════════════
+   § 0  FLAG-EMOJI POLYFILL (Twemoji Country Flags)
+   Windows fonts don't render regional-indicator pairs as flag
+   glyphs (🇺🇸 falls back to "US"). This webfont covers only the
+   flag codepoint ranges via unicode-range, so the browser fetches
+   it strictly for flag characters and falls through to the page
+   font for everything else.
+
+   To use: prepend "Twemoji Country Flags" to body's font-family
+   in each page's stylesheet (already done across the site).
+═══════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: "Twemoji Country Flags";
+  unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065, U+E0067,
+                 U+E006C, U+E006E, U+E0073-E0074, U+E0077, U+E007F;
+  src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+  font-display: swap;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    § 1  CSS VARIABLES  (Syne-atlas default palette)
