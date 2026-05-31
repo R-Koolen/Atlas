@@ -1,0 +1,13 @@
+# Houdt GitHub Actions én de Docker-base-image automatisch up-to-date.
+# Dependabot opent PR's met versie-/security-updates; zo blijf je gepatcht.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly

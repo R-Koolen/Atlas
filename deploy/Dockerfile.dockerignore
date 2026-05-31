@@ -1,0 +1,18 @@
+# Per-Dockerfile ignore (BuildKit/buildx). Bepaalt wat WEL/NIET in de image komt.
+# Voorkomt o.a. dat .git of infra-bestanden publiek geserveerd worden.
+
+# Versiebeheer & editor
+.git
+.gitignore
+.github
+.claude
+.vscode
+
+# Deploy-infra (hoort niet in de site-image)
+deploy
+*.md
+
+# Dataverwerking (niet nodig tijdens runtime)
+**/*.ipynb
+**/*.py
+**/*.xlsx

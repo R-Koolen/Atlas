@@ -2,3 +2,8 @@ un nations voting analysis/2026_02_06_ga_voting.csv
 un nations voting analysis/local-data/2026_02_06_ga_voting.csv
 .claude\settings.local.json
 .vscode\settings.json
+
+# Deploy-config die alleen lokaal/op de server hoeft (niet naar git)
+deploy/compose.yml
+deploy/proxy/Caddyfile
+deploy/HARDENING.md

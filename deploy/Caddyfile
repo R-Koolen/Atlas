@@ -1,0 +1,32 @@
+# Interne webserver voor de statische site.
+# Draait achter de edge-reverse-proxy (zie deploy/proxy/Caddyfile),
+# daarom plain HTTP op een niet-privileged poort.
+:8080 {
+	root * /srv
+	encode gzip zstd
+	file_server
+
+	# --- Security headers ---
+	header {
+		# Forceer HTTPS bij toekomstige clients (genegeerd zolang er geen TLS is)
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		# Voorkom MIME-sniffing
+		X-Content-Type-Options "nosniff"
+		# Geen embedding in iframes (clickjacking)
+		X-Frame-Options "DENY"
+		# Beperk referrer-lekkage
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# Schakel ongebruikte browser-features uit
+		Permissions-Policy "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+
+		# Content-Security-Policy, exact afgestemd op de bronnen die de site gebruikt:
+		#  script-src : D3 + topojson worden van cdnjs geladen (geen inline scripts -> streng)
+		#  style-src  : Google Fonts CSS + inline style-attributen/<style> blokken
+		#  font-src   : Google Fonts + jsDelivr (vlag-emoji woff2)
+		#  connect-src: fetch() naar geo/data-JSON op jsdelivr / githubusercontent / cdnjs
+		Content-Security-Policy "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://raw.githubusercontent.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+
+		# Verberg server-versie
+		-Server
+	}
+}
