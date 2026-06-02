@@ -1,0 +1,13 @@
+# Bewust geaccepteerde kwetsbaarheden, mét vervaldatum.
+# Na 'expired_at' telt de uitzondering niet meer mee -> de build valt weer om,
+# zodat je gedwongen wordt opnieuw te beoordelen of de fix er inmiddels is.
+# Alle niet-genoemde HIGH/CRITICAL blokkeren de build gewoon.
+vulnerabilities:
+  - id: CVE-2026-34986
+    statement: >-
+      go-jose v3.0.4 DoS via speciaal vervaardigd JWE-token, meegecompileerd in
+      de Caddy-binary (niet onze code). Niet exploiteerbaar: dit is een statische
+      file-server die geen door gebruikers aangeleverde JOSE/JWE-tokens verwerkt.
+      Fix vereist dat upstream Caddy hercompileert met go-jose 3.0.5.
+      Herzien bij vervaldatum: is er een nieuwe Caddy-release met de fix?
+    expired_at: 2026-09-02
