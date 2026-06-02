@@ -8,8 +8,8 @@
 .claude
 .vscode
 
-# Deploy-infra (hoort niet in de site-image)
-deploy
+# Deploy-infra: NIET hier negeren, want deploy/Caddyfile wordt door de Dockerfile
+# gekopieerd. De map wordt na het kopiëren weer uit /srv verwijderd (zie Dockerfile).
 *.md
 
 # Dataverwerking (niet nodig tijdens runtime)
