@@ -13,8 +13,7 @@ permissions:
   packages: write
 
 env:
-  # ghcr.io/<owner>/<repo> — automatisch lowercased eigenaar
-  IMAGE: ghcr.io/${{ github.repository }}
+  REGISTRY: ghcr.io
 
 jobs:
   build:
@@ -25,6 +24,11 @@ jobs:
       # houdt ze actueel. Major-tags worden hier gebruikt voor leesbaarheid.
       - name: Checkout
         uses: actions/checkout@v4
+
+      # GHCR/Docker eist kleine letters; github.repository kan hoofdletters bevatten
+      # (bv. R-Koolen/Atlas). Daarom hier naar lowercase omzetten.
+      - name: Bepaal image-naam (lowercase)
+        run: echo "IMAGE=${REGISTRY}/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
 
       - name: Log in bij GHCR
         uses: docker/login-action@v3
