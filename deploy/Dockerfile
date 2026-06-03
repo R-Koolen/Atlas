@@ -24,6 +24,11 @@ COPY --from=prep /site /srv
 RUN adduser -D -H -s /sbin/nologin caddy-user && \
     chown -R caddy-user:caddy-user /srv /etc/caddy
 
+# Caddy-binary draagt cap_net_bind_service; wij luisteren op 8080 (>1024)
+# en hebben die niet nodig. Verwijderen zodat compose's cap_drop: ALL werkt
+# zonder dat de kernel het starten van het binary weigert.
+RUN setcap -r /usr/bin/caddy 2>/dev/null || true
+
 USER caddy-user
 
 # Healthcheck zodat de orchestrator weet of de container gezond is
