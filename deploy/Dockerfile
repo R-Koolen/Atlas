@@ -20,8 +20,11 @@ FROM caddy:2-alpine
 COPY deploy/Caddyfile /etc/caddy/Caddyfile
 COPY --from=prep /site /srv
 
-# Draai als non-root user
-USER caddy
+# Maak non-root user aan en geef rechten
+RUN adduser -D -H -s /sbin/nologin caddy-user && \
+    chown -R caddy-user:caddy-user /srv /etc/caddy
+
+USER caddy-user
 
 # Healthcheck zodat de orchestrator weet of de container gezond is
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
