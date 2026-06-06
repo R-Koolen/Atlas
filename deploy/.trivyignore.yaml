@@ -11,3 +11,10 @@ vulnerabilities:
       Fix vereist dat upstream Caddy hercompileert met go-jose 3.0.5.
       Herzien bij vervaldatum: is er een nieuwe Caddy-release met de fix?
     expired_at: 2026-09-02
+  - id: CVE-2026-42504
+    statement: >-
+      Go stdlib MIME header parsing DoS in Caddy-binary. Niet exploiteerbaar:
+      Atlas is een statische file-server die geen door gebruikers aangeleverde
+      MIME headers verwerkt buiten normale HTTP-requests. Fix vereist nieuwe
+      Caddy-release met Go 1.26.4. Herzien bij vervaldatum.
+    expired_at: 2026-09-06
